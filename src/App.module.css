@@ -1,0 +1,132 @@
+.appShell {
+  width: min(100%, 460px);
+  min-height: min(920px, calc(100vh - 32px));
+  margin: var(--space-md) auto;
+  padding: 22px var(--space-lg) 112px;
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)),
+    linear-gradient(145deg, rgba(255, 239, 244, 0.92), rgba(255, 250, 238, 0.74));
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+:global([data-theme="dark"]) .appShell {
+  background:
+    radial-gradient(circle at 84% 0%, rgba(255, 127, 168, 0.16), transparent 34%),
+    linear-gradient(145deg, rgba(53, 25, 34, 0.94), rgba(36, 16, 22, 0.92));
+}
+
+.screen {
+  display: grid;
+  gap: var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.heroLayout,
+.todayArc,
+.compassCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.heroLayout {
+  align-items: stretch;
+}
+
+.heroLayout > div:first-child {
+  flex: 1 1 62%;
+}
+
+.miniBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  border-radius: var(--radius-pill);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 850;
+  white-space: nowrap;
+  background: var(--color-surface);
+  color: var(--color-primary-deep);
+}
+
+.widgetGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.tinyWidget {
+  min-height: 84px;
+  border-radius: var(--radius-compact);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.tinyWidgetSoft {
+  background: var(--color-surface);
+}
+
+.tinyWidgetWarm {
+  background: var(--color-surface-warm);
+}
+
+.tinyWidget span {
+  color: var(--color-text-muted);
+}
+
+.tinyWidget strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.2rem;
+}
+
+.updatePrompt {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 30;
+  width: min(calc(100% - 28px), 430px);
+  transform: translateX(-50%);
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(18px);
+}
+
+.updatePrompt p {
+  margin: 4px 0 0;
+}
+
+.updateActions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.updateActions button {
+  flex: 1;
+  margin-top: 0;
+}
+
+@media (min-width: 760px) {
+  .appShell {
+    margin-block: var(--space-xl);
+    padding-inline: 22px;
+  }
+
+  .heroLayout {
+    min-height: 214px;
+  }
+}

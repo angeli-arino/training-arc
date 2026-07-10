@@ -1,7 +1,13 @@
 .agents/
 .codex/
 node_modules/
+.pnpm-store/
+dist/
 dev-server.err.log
 dev-server.out.log
+preview.err.log
+preview.out.log
+dev-vite.err.log
+dev-vite.out.log
 .DS_Store
 Thumbs.db

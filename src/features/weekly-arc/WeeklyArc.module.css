@@ -1,0 +1,50 @@
+.weeklyStrip {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(58px, 1fr));
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.dayBubble {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  min-height: 112px;
+  border-radius: var(--radius-pill);
+  padding: 12px 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.dayBubble strong {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+}
+
+.dayBubble small {
+  color: var(--color-text-muted);
+  text-align: center;
+  font-size: 0.68rem;
+  line-height: 1.1;
+}
+
+.slay-day strong {
+  background: var(--color-slay);
+}
+
+.modify-the-quest strong {
+  background: var(--color-modify);
+}
+
+.recovery-episode strong {
+  background: var(--color-recovery);
+}
+
+.peace-mode strong {
+  background: var(--color-peace);
+}

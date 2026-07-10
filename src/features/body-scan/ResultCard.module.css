@@ -1,0 +1,41 @@
+.resultHero {
+  border-radius: var(--radius-compact);
+  padding: var(--space-lg);
+  background: var(--color-surface-warm);
+}
+
+.resultHero h2 {
+  margin-top: var(--space-md);
+  font-size: 1.8rem;
+}
+
+.slay-day {
+  background: color-mix(in srgb, var(--color-slay) 26%, var(--color-surface-warm));
+}
+
+.modify-the-quest {
+  background: color-mix(in srgb, var(--color-modify) 34%, var(--color-surface-warm));
+}
+
+.recovery-episode {
+  background: color-mix(in srgb, var(--color-recovery) 24%, var(--color-surface-warm));
+}
+
+.peace-mode {
+  background: color-mix(in srgb, var(--color-peace) 20%, var(--color-surface-warm));
+}
+
+.resultList {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg) 6px 2px;
+}
+
+.actionStack {
+  display: grid;
+  gap: 10px;
+}
+
+.actionStack button {
+  margin-top: 0;
+}

@@ -1,0 +1,243 @@
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-top: var(--space-sm);
+}
+
+.pageHeader h1,
+.softCard h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.pageHeader h1 {
+  font-size: var(--font-display);
+  line-height: 0.98;
+}
+
+.softCard h2 {
+  font-size: var(--font-title);
+  line-height: 1.12;
+}
+
+.softCard {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  background: rgba(255, 253, 252, 0.86);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+:global([data-theme="dark"]) .softCard {
+  background: rgba(53, 25, 34, 0.9);
+}
+
+.softCard_hero,
+.softCard_blush {
+  background:
+    linear-gradient(135deg, rgba(255, 214, 226, 0.92), rgba(255, 241, 220, 0.86)),
+    var(--color-surface-warm);
+  box-shadow: var(--shadow-card);
+}
+
+:global([data-theme="dark"]) .softCard_hero,
+:global([data-theme="dark"]) .softCard_blush {
+  background:
+    linear-gradient(135deg, rgba(90, 38, 55, 0.96), rgba(69, 32, 44, 0.92)),
+    var(--color-surface-warm);
+}
+
+.softCard_result {
+  padding: var(--space-sm);
+}
+
+.softCard_compact {
+  padding: var(--space-md);
+  border-radius: var(--radius-compact);
+}
+
+.pillButton {
+  border: 0;
+  border-radius: var(--radius-pill);
+  min-height: 46px;
+  padding: 0 var(--space-lg);
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  font: inherit;
+}
+
+.pillButton:active {
+  transform: scale(0.97);
+}
+
+.pillButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.pillButton_primary {
+  margin-top: var(--space-md);
+  color: #fffdfc;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-deep));
+  box-shadow: 0 14px 30px rgba(248, 111, 155, 0.32);
+  font-weight: 800;
+}
+
+.pillButton_secondary {
+  color: var(--color-text);
+  background: var(--color-cream);
+  border: 1px solid var(--color-border);
+  font-weight: 750;
+}
+
+.pillButton_ghost {
+  background: transparent;
+  color: var(--color-primary-deep);
+}
+
+.themeToggle {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.themeToggle button {
+  border: 0;
+  border-radius: var(--radius-pill);
+  min-height: 34px;
+  padding: 0 11px;
+  color: var(--color-text-muted);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.themeToggle .active {
+  background: var(--color-primary-soft);
+  color: var(--color-text);
+}
+
+.statusChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  border-radius: var(--radius-pill);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.statusDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.slay-day {
+  color: var(--color-slay-text);
+  background: color-mix(in srgb, var(--color-slay) 72%, var(--color-surface));
+}
+
+.modify-the-quest {
+  color: var(--color-modify-text);
+  background: color-mix(in srgb, var(--color-modify) 76%, var(--color-surface));
+}
+
+.recovery-episode {
+  color: var(--color-recovery-text);
+  background: color-mix(in srgb, var(--color-recovery) 76%, var(--color-surface));
+}
+
+.peace-mode {
+  color: var(--color-peace-text);
+  background: color-mix(in srgb, var(--color-peace) 68%, var(--color-surface));
+}
+
+.iconOrb {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid var(--color-border);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(255, 214, 226, 0.64));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), var(--shadow-soft);
+  color: var(--color-primary-deep);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+:global([data-theme="dark"]) .iconOrb {
+  background: linear-gradient(145deg, rgba(255, 217, 225, 0.18), rgba(90, 38, 55, 0.62));
+}
+
+.iconOrb_hero {
+  width: 76px;
+  height: 76px;
+  border-radius: 28px;
+}
+
+.iconOrb_small {
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  font-size: 0.68rem;
+}
+
+.bottomNav {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-md);
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  width: calc(100% - 32px);
+  padding: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 26px;
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  box-shadow: var(--shadow-card);
+  transform: translateX(-50%);
+  backdrop-filter: blur(18px);
+}
+
+.bottomNav button {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 52px;
+  border: 0;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.bottomNav .active {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-deep);
+}
+
+.navIcon {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  font-size: 0.68rem;
+  font-weight: 900;
+}
