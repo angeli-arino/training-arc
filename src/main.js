@@ -544,3 +544,11 @@ function render() {
 
 app.addEventListener("click", handleClick);
 render();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {
+      // Service worker support is a bonus; the app should still run normally.
+    });
+  });
+}

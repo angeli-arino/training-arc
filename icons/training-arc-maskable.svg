@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Training Arc">
+  <defs>
+    <linearGradient id="bg" x1="64" y1="64" x2="448" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7F2"/>
+      <stop offset="0.5" stop-color="#FFD6E2"/>
+      <stop offset="1" stop-color="#FFC9A8"/>
+    </linearGradient>
+    <linearGradient id="heart" x1="164" y1="142" x2="364" y2="382" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF8AAD"/>
+      <stop offset="1" stop-color="#D94F73"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="394" cy="118" r="54" fill="#FFF1DC" opacity="0.78"/>
+  <circle cx="112" cy="396" r="44" fill="#D9C4F2" opacity="0.64"/>
+  <path fill="url(#heart)" d="M256 386c-13-16-33-34-61-57-57-48-94-80-94-130 0-43 33-75 76-75 31 0 56 16 70 42 14-26 39-42 70-42 43 0 76 32 76 75 0 50-37 82-94 130-28 23-48 41-61 57z"/>
+  <path fill="#FFFDFC" d="M248 302c-7 0-13-5-15-11l-17-50-10 22c-3 5-8 9-15 9h-44c-9 0-16-7-16-16s7-16 16-16h34l23-49c3-6 9-10 16-10s13 5 15 11l18 54 22-89c2-7 8-12 16-12 7 0 14 5 16 12l23 83h35c9 0 16 7 16 16s-7 16-16 16h-47c-7 0-13-5-15-12l-11-40-23 71c-2 7-8 11-15 11h-2z"/>
+</svg>
