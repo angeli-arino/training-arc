@@ -4,6 +4,8 @@ const requiredFiles = [
   "index.html",
   "manifest.webmanifest",
   "sw.js",
+  "icons/training-arc-192.png",
+  "icons/training-arc-512.png",
   "icons/training-arc-icon.svg",
   "icons/training-arc-maskable.svg",
   "src/main.js",
@@ -36,6 +38,14 @@ if (!index.includes('rel="manifest"') || !index.includes("apple-mobile-web-app-c
 const parsedManifest = JSON.parse(manifest);
 if (parsedManifest.start_url !== "." || parsedManifest.scope !== ".") {
   throw new Error("Manifest start_url and scope must stay relative for GitHub Pages.");
+}
+
+if (!parsedManifest.icons.some((icon) => icon.sizes === "192x192" && icon.type === "image/png")) {
+  throw new Error("Manifest needs a 192x192 PNG icon for install support.");
+}
+
+if (!parsedManifest.icons.some((icon) => icon.sizes === "512x512" && icon.type === "image/png")) {
+  throw new Error("Manifest needs a 512x512 PNG icon for install support.");
 }
 
 if (!main.includes('serviceWorker') || !main.includes('./sw.js')) {

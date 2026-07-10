@@ -3,6 +3,8 @@ const CACHE_ASSETS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
+  "./icons/training-arc-192.png",
+  "./icons/training-arc-512.png",
   "./icons/training-arc-icon.svg",
   "./icons/training-arc-maskable.svg",
   "./src/main.js",
