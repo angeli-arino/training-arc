@@ -112,8 +112,8 @@ function HomeScreen({ latestResult, onStartScan, onOpenQuests }: { latestResult:
       </SoftCard>
       <TrainingCompassCard status={compassStatus} result={latestResult} />
       <section className={styles.widgetGrid} aria-label="Today at a glance">
-        <TinyWidget icon="moon" label="Sleep" value="7h 10m" tone="soft" />
-        <TinyWidget icon="heart" label="Soreness" value="Mild" tone="warm" />
+        <TinyWidget icon="moon" label="Sleep" value="7h 22m" detail="enough-ish" tone="soft" />
+        <TinyWidget icon="heart" label="Soreness" value="Mild" detail="legs watch" tone="warm" />
       </section>
       <HomeWeeklyArc />
     </>
@@ -135,7 +135,7 @@ function TrainingCompassCard({ status, result }: { status: string; result: Train
           <p className="eyebrow">Training Compass</p>
           <h2>{status}</h2>
           <p>{result ? result.recommendation : "Energy is okay, soreness is spicy. We stay consistent without being dramatic."}</p>
-          <div className={uiStyles.chipRow}>
+          <div className={`${uiStyles.chipRow} ${styles.compassChips}`}>
             <button className={`${uiStyles.chip} ${uiStyles.chipAccent}`} type="button">◒ Reduce intensity</button>
             <button className={uiStyles.chip} type="button">✦ Tiny win accepted</button>
           </div>
@@ -146,11 +146,11 @@ function TrainingCompassCard({ status, result }: { status: string; result: Train
   );
 }
 
-function TinyWidget({ icon, label, value, tone }: { icon: string; label: string; value: string; tone: "soft" | "warm" }) {
+function TinyWidget({ icon, label, value, detail, tone }: { icon: string; label: string; value: string; detail: string; tone: "soft" | "warm" }) {
   return (
     <article className={`${styles.tinyWidget} ${tone === "warm" ? styles.tinyWidgetWarm : styles.tinyWidgetSoft}`}>
       <span className={styles.metricIcon}><AppIcon name={icon} /></span>
-      <div><span>{label}</span><strong>{value}</strong></div>
+      <div><span>{label}</span><strong>{value}</strong><small>{detail}</small></div>
       <svg className={styles.sparkline} viewBox="0 0 100 24" aria-hidden="true"><path d="M2 18 14 15 25 19 38 9 51 14 65 6 78 11 98 4" /></svg>
     </article>
   );

@@ -23,8 +23,8 @@ export default defineConfig({
         scope: "/training-arc/",
         display: "standalone",
         orientation: "portrait",
-        background_color: "#FFF7F2",
-        theme_color: "#F86F9B",
+        background_color: "#f7f1f4",
+        theme_color: "#f7f1f4",
         categories: ["health", "fitness", "lifestyle"],
         icons: [
           {
