@@ -124,8 +124,9 @@ export function BodyScanQuest({ scan, scanStep, onScanChange, onStepChange, onCo
   return (
     <>
       <SoftCard className={styles.scanCard}>
+        <div className={styles.scanEmblem} aria-hidden="true">♡</div>
         <div className={styles.scanProgress} aria-hidden="true">
-          <span style={{ width: `${((scanStep + 1) / SCAN_STEPS.length) * 100}%` }} />
+          {Array.from({ length: 3 }, (_, index) => <span className={index <= Math.floor(scanStep / 2) ? styles.progressActive : ""} key={index} />)}
         </div>
         <div className={styles.questionBlock}>
           <p className="eyebrow">{step.key === "rpe" ? "Recent effort / RPE" : "Cooked Meter"}</p>

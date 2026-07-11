@@ -1,67 +1,34 @@
-* {
-  box-sizing: border-box;
-}
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap");
 
+* { box-sizing: border-box; }
+html { min-width: 320px; background: var(--color-bg-deep); scroll-behavior: smooth; }
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  font-family: var(--font-body);
   background:
-    radial-gradient(circle at 16% 0%, rgba(255, 214, 226, 0.78), transparent 24rem),
-    radial-gradient(circle at 88% 12%, rgba(255, 201, 168, 0.5), transparent 20rem),
-    linear-gradient(145deg, var(--color-background), var(--color-cream));
+    radial-gradient(circle at 6% 82%, rgba(167, 23, 86, .18), transparent 28rem),
+    radial-gradient(circle at 88% 14%, rgba(255, 76, 157, .08), transparent 24rem),
+    linear-gradient(145deg, var(--color-bg-deep), var(--color-bg));
   color: var(--color-text);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.42;
-  background-image:
-    radial-gradient(circle, rgba(248, 111, 155, 0.11) 1px, transparent 1.5px),
-    radial-gradient(circle, rgba(255, 201, 168, 0.14) 1px, transparent 1.5px);
-  background-position: 0 0, 18px 24px;
-  background-size: 42px 42px;
+  opacity: .42;
+  background-image: radial-gradient(circle, rgba(255, 152, 194, .75) 0 1px, transparent 1.4px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, #000, transparent 88%);
 }
-
-button {
-  font: inherit;
-}
-
-button:focus-visible {
-  outline: 3px solid var(--color-secondary);
-  outline-offset: 3px;
-}
-
-.kicker,
-.eyebrow {
-  margin: 0 0 7px;
-  color: var(--color-primary-deep);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0;
-}
-
-.muted,
-p {
-  color: var(--color-text-muted);
-  line-height: 1.5;
-}
-
-p {
-  margin: 8px 0 0;
-}
-
-h1,
-h2,
-h3 {
-  color: var(--color-text);
-}
-
-@media (min-width: 760px) {
-  :root {
-    --font-display: 2.55rem;
-  }
-}
+button, textarea { font: inherit; }
+button:focus-visible, textarea:focus-visible { outline: 2px solid var(--color-primary-deep); outline-offset: 3px; }
+.kicker, .eyebrow { margin: 0 0 7px; color: var(--color-primary-deep); font-size: .78rem; font-weight: 800; letter-spacing: -.01em; }
+.muted, p { color: var(--color-text-secondary); line-height: 1.5; }
+p { margin: 8px 0 0; }
+h1, h2, h3 { color: var(--color-text); font-family: "Nunito", "Avenir Next", "Segoe UI", sans-serif; letter-spacing: -.04em; }
+@media (max-width: 410px) { :root { --space-lg: 17px; } }

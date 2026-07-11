@@ -1,16 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRegisterSW } from "virtual:pwa-register/react";
-import { BottomNavigation, Header, IconOrb, PillButton, SoftCard, StatusChip } from "./components/ui";
+import { AppIcon, BottomNavigation, Header, IconOrb, PillButton, SoftCard } from "./components/ui";
 import { BodyScanQuest } from "./features/body-scan/BodyScanQuest";
 import { DEFAULT_SCAN, evaluateBodyScan } from "./features/body-scan/bodyScanLogic";
 import { ResultCard } from "./features/body-scan/ResultCard";
 import { WeeklyArc } from "./features/weekly-arc/WeeklyArc";
+import { ArcStats } from "./features/arc-stats/ArcStats";
+import { Profile } from "./features/profile/Profile";
 import { WorkoutLog } from "./features/workout-log/WorkoutLog";
 import { useLocalStorage } from "./hooks/useLocalStorage";
-import { BodyScan, Route, SavedArc, STATUS, Theme, TrainingResult } from "./types/training";
+import { BodyScan, Route, SavedArc, Theme, TrainingResult } from "./types/training";
 import styles from "./App.module.css";
-
-type WorkoutFilter = "all" | "run" | "gym" | "other";
+import uiStyles from "./components/ui.module.css";
 
 export default function App() {
   const [route, setRoute] = useState<Route>("home");
@@ -19,7 +20,6 @@ export default function App() {
   const [latestResult, setLatestResult] = useLocalStorage<TrainingResult | null>("trainingArcResult", null);
   const [saved, setSaved] = useLocalStorage<SavedArc[]>("trainingArcSaved", []);
   const [scanStep, setScanStep] = useState(0);
-  const [filter, setFilter] = useState<WorkoutFilter>("all");
   const { needRefresh, updateServiceWorker } = useRegisterSW();
 
   useEffect(() => {
@@ -61,25 +61,20 @@ export default function App() {
           subtitle={headerCopy.subtitle}
           theme={theme}
           onThemeChange={setTheme}
+          hideHeading={route === "profile"}
         />
-        {route === "home" ? <HomeScreen latestResult={latestResult} onStartScan={() => navigate("scan")} /> : null}
-        {route === "scan" ? (
-          <BodyScanQuest
-            scan={scan}
-            scanStep={scanStep}
-            onScanChange={setScan}
-            onStepChange={setScanStep}
-            onComplete={completeScan}
-          />
-        ) : null}
+        {route === "home" ? <HomeScreen latestResult={latestResult} onStartScan={() => navigate("scan")} onOpenQuests={() => navigate("arc")} /> : null}
+        {route === "scan" ? <BodyScanQuest scan={scan} scanStep={scanStep} onScanChange={setScan} onStepChange={setScanStep} onComplete={completeScan} /> : null}
         {route === "result" && latestResult ? (
           <ResultCard result={latestResult} onSave={saveArc} onRetake={() => navigate("scan")} />
         ) : null}
         {route === "result" && !latestResult ? (
           <ResultCard result={evaluateBodyScan(scan)} onSave={saveArc} onRetake={() => navigate("scan")} />
         ) : null}
-        {route === "log" ? <WorkoutLog filter={filter} latestResult={latestResult} onFilterChange={setFilter} /> : null}
+        {route === "log" ? <WorkoutLog latestResult={latestResult} /> : null}
         {route === "arc" ? <WeeklyArc latestResult={latestResult} /> : null}
+        {route === "stats" ? <ArcStats /> : null}
+        {route === "profile" ? <Profile /> : null}
       </main>
       <BottomNavigation route={route} onRouteChange={navigate} />
       {needRefresh[0] ? <UpdatePrompt onLater={() => needRefresh[1](false)} onUpdate={() => updateServiceWorker(true)} /> : null}
@@ -87,64 +82,76 @@ export default function App() {
   );
 }
 
-function HomeScreen({ latestResult, onStartScan }: { latestResult: TrainingResult | null; onStartScan: () => void }) {
-  const compassStatus = latestResult?.status || "No scan yet today";
+function HomeScreen({ latestResult, onStartScan, onOpenQuests }: { latestResult: TrainingResult | null; onStartScan: () => void; onOpenQuests: () => void }) {
+  const compassStatus = latestResult?.status || "Modify the Quest";
 
   return (
     <>
-      <SoftCard variant="blush">
-        <div className={styles.todayArc}>
-          <div>
-            <p className="eyebrow">Plan</p>
-            <h2>Tempo Run + Upper Body</h2>
-            <p className="muted">Protect the protagonist, then collect the tiny win.</p>
-          </div>
-          <span className={styles.miniBadge}>Week 1</span>
+      <SoftCard className={styles.planCard} onClick={onOpenQuests}>
+        <span className={styles.planIcon}><AppIcon name="plan" /></span>
+        <div className={styles.cardContent}>
+          <p className="label">Plan</p>
+          <h2>Tempo Run + Upper Body</h2>
+          <p>Protect the protagonist, then collect the tiny win.</p>
+        </div>
+        <div className={styles.planSide}>
+          <span className={styles.pill}>Week 1</span>
+          <span className={styles.chevron} aria-hidden="true">›</span>
         </div>
       </SoftCard>
-      <SoftCard variant="hero">
-        <div className={styles.heroLayout}>
-          <div>
-            <p className="eyebrow">Cooked Meter</p>
-            <h2>How cooked are we today?</h2>
-            <p>Quick check-in before you train, modify, or rest.</p>
-            <PillButton onClick={onStartScan}>Start Body Scan Quest</PillButton>
-          </div>
-          <IconOrb label="scan" size="hero" />
+      <SoftCard className={styles.scanCard}>
+        <div className={styles.scanCopy}>
+          <p className="label">Cooked Meter</p>
+          <h2>How cooked are we today?</h2>
+          <p>Quick check-in before you train, modify, or rest.</p>
         </div>
+        <div className={styles.orb} aria-hidden="true"><AppIcon name="heart" /></div>
+        <button className={styles.primaryFull} type="button" onClick={onStartScan}>
+          Start Body Scan Quest <span aria-hidden="true">→</span>
+        </button>
       </SoftCard>
       <TrainingCompassCard status={compassStatus} result={latestResult} />
       <section className={styles.widgetGrid} aria-label="Today at a glance">
-        <TinyWidget label="Sleep" value="7h 10m" tone="soft" />
-        <TinyWidget label="Soreness" value="Mild" tone="warm" />
-        <TinyWidget label="Last workout" value="Gym" tone="soft" />
-        <TinyWidget label="Weekly load" value="2 / 4" tone="warm" />
-        <TinyWidget label="Mood" value={latestResult?.status === STATUS.peace ? "Needs softness" : "Steady"} tone="soft" />
+        <TinyWidget icon="moon" label="Sleep" value="7h 10m" tone="soft" />
+        <TinyWidget icon="heart" label="Soreness" value="Mild" tone="warm" />
       </section>
+      <HomeWeeklyArc />
     </>
   );
+}
+
+function HomeWeeklyArc() {
+  return <section className={styles.homeWeeklyArc} aria-label="Weekly Arc summary">
+    <div><p className="eyebrow">Weekly Arc</p><h2>Keep the streak gentle</h2></div><span>3 / 5 quests</span>
+    <div className={styles.weekDots}>{["M", "T", "W", "T", "F", "S", "S"].map((day, index) => <div key={`${day}-${index}`} className={index < 2 ? styles.weekComplete : index === 2 ? styles.weekToday : ""}><small>{day}</small><b>{index < 2 ? "✓" : index + 1}</b></div>)}</div>
+  </section>;
 }
 
 function TrainingCompassCard({ status, result }: { status: string; result: TrainingResult | null }) {
   return (
     <SoftCard>
       <div className={styles.compassCard}>
-        <div>
+        <div className={styles.compassCopy}>
           <p className="eyebrow">Training Compass</p>
           <h2>{status}</h2>
-          <p>{result ? result.recommendation : "No scan yet today. Let's check in before the quest."}</p>
+          <p>{result ? result.recommendation : "Energy is okay, soreness is spicy. We stay consistent without being dramatic."}</p>
+          <div className={uiStyles.chipRow}>
+            <button className={`${uiStyles.chip} ${uiStyles.chipAccent}`} type="button">◒ Reduce intensity</button>
+            <button className={uiStyles.chip} type="button">✦ Tiny win accepted</button>
+          </div>
         </div>
-        {result ? <StatusChip status={result.status} /> : <IconOrb label="arc" size="small" />}
+        <span className={styles.compassOrb}><IconOrb label="bolt" size="small" /></span>
       </div>
     </SoftCard>
   );
 }
 
-function TinyWidget({ label, value, tone }: { label: string; value: string; tone: "soft" | "warm" }) {
+function TinyWidget({ icon, label, value, tone }: { icon: string; label: string; value: string; tone: "soft" | "warm" }) {
   return (
     <article className={`${styles.tinyWidget} ${tone === "warm" ? styles.tinyWidgetWarm : styles.tinyWidgetSoft}`}>
-      <span>{label}</span>
-      <strong>{value}</strong>
+      <span className={styles.metricIcon}><AppIcon name={icon} /></span>
+      <div><span>{label}</span><strong>{value}</strong></div>
+      <svg className={styles.sparkline} viewBox="0 0 100 24" aria-hidden="true"><path d="M2 18 14 15 25 19 38 9 51 14 65 6 78 11 98 4" /></svg>
     </article>
   );
 }
@@ -185,18 +192,30 @@ function getHeaderCopy(route: Route, latestResult: TrainingResult | null) {
 
   if (route === "log") {
     return {
-      kicker: "Workout Log",
-      title: "Soft journal energy",
-      subtitle: "Saved quests, tiny wins, and training notes."
+      kicker: "Daily Log",
+      title: "Capture the signal,\nskip the essay.",
+      subtitle: "A quick log that is actually quick."
     };
   }
 
   if (route === "arc") {
     return {
-      kicker: "Weekly Arc",
-      title: "This week has character development",
-      subtitle: "Planner strip first, numbers second."
+      kicker: "Quest Board",
+      title: "Your training,\nwithout the chaos.",
+      subtitle: "One week at a time. Clear priorities, kinder adjustments."
     };
+  }
+
+  if (route === "stats") {
+    return {
+      kicker: "Arc Stats",
+      title: "Progress you can\nactually feel.",
+      subtitle: "Useful trends, no punishment dashboard."
+    };
+  }
+
+  if (route === "profile") {
+    return { kicker: "", title: "" };
   }
 
   return {

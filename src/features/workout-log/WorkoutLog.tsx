@@ -1,9 +1,8 @@
-import { IconOrb, PillButton, SoftCard, StatusChip } from "../../components/ui";
-import { STATUS, TrainingResult } from "../../types/training";
+import { PillButton, SoftCard } from "../../components/ui";
+import { TrainingResult } from "../../types/training";
 import styles from "./WorkoutLog.module.css";
 
 type WorkoutFilter = "all" | "run" | "gym" | "other";
-type WorkoutType = "run" | "gym" | "walk";
 
 interface WorkoutLogProps {
   filter: WorkoutFilter;
@@ -11,71 +10,53 @@ interface WorkoutLogProps {
   onFilterChange: (filter: WorkoutFilter) => void;
 }
 
-const WORKOUTS: Array<[WorkoutType, string, string, string, string, typeof STATUS.modify | typeof STATUS.slay | typeof STATUS.recovery]> = [
-  ["run", "Easy Run", "Today", "32 min", "RPE 5", STATUS.modify],
-  ["gym", "Upper Body", "Yesterday", "45 min", "RPE 7", STATUS.slay],
-  ["walk", "Recovery Walk", "Tue", "22 min", "RPE 2", STATUS.recovery]
-];
-
-export function WorkoutLog({ filter, latestResult, onFilterChange }: WorkoutLogProps) {
-  const workouts = WORKOUTS.map((workout, index) => {
-    if (index === 0 && latestResult) return [workout[0], workout[1], workout[2], workout[3], workout[4], latestResult.status] as const;
-    return workout;
-  });
-  const filtered = filter === "all" ? workouts : workouts.filter(([type]) => type === filter);
-
+export function WorkoutLog({ latestResult }: WorkoutLogProps) {
   return (
-    <>
-      <div className={styles.filterRow} role="group" aria-label="Workout filter">
-        {(["all", "run", "gym", "other"] as WorkoutFilter[]).map((item) => (
-          <button
-            className={`${styles.choicePill} ${filter === item ? styles.selected : ""}`}
-            key={item}
-            type="button"
-            onClick={() => onFilterChange(item)}
-          >
-            {item[0].toUpperCase() + item.slice(1)}
-          </button>
-        ))}
-      </div>
-      <section className={styles.listStack}>
-        {filtered.length ? (
-          filtered.map((workout) => <WorkoutCard key={`${workout[1]}-${workout[2]}`} workout={workout} />)
-        ) : (
-          <SoftCard variant="compact">
-            <p>No logs yet. Tiny wins count when you save them.</p>
-          </SoftCard>
-        )}
-      </section>
-      <PillButton variant="secondary">View all logs</PillButton>
-    </>
-  );
-}
-
-function WorkoutCard({ workout }: { workout: readonly [WorkoutType, string, string, string, string, string] }) {
-  const [type, title, date, duration, rpe, status] = workout;
-
-  return (
-    <SoftCard variant="compact">
-      <article className={styles.workoutCard}>
-        <IconOrb label={typeLabel(type)} size="small" />
-        <div>
-          <p className="eyebrow">{date}</p>
-          <h2>{title}</h2>
-          <p className="muted">
-            {duration} - {rpe}
-          </p>
+    <form className={styles.logForm} noValidate>
+      <article className={styles.questionCard}>
+        <div className={styles.questionTitle}>
+          <span className={styles.step}>01</span>
+          <div>
+            <p className="label">Energy</p>
+            <h2>How charged are you?</h2>
+          </div>
         </div>
-        <StatusChip status={status as TrainingResult["status"]} />
+        <div className={styles.numberScale} role="radiogroup" aria-label="Energy scale">
+          {[1, 2, 3, 4, 5].map((value) => (
+            <button key={value} type="button">
+              {value}
+            </button>
+          ))}
+        </div>
       </article>
-    </SoftCard>
-  );
-}
 
-function typeLabel(type: WorkoutType): string {
-  return {
-    run: "Run",
-    gym: "Gym",
-    walk: "Walk"
-  }[type];
+      <article className={styles.questionCard}>
+        <div className={styles.questionTitle}>
+          <span className={styles.step}>02</span>
+          <div>
+            <p className="label">Soreness</p>
+            <h2>How spicy is the body?</h2>
+          </div>
+        </div>
+        <div className={styles.numberScale} role="radiogroup" aria-label="Soreness scale">
+          {[1, 2, 3, 4, 5].map((value) => (
+            <button key={value} type="button">
+              {value}
+            </button>
+          ))}
+        </div>
+      </article>
+
+      <article className={styles.notesCard}>
+        <label htmlFor="notes">
+          <span className="label">Tiny note</span>
+          <strong>Anything worth remembering?</strong>
+        </label>
+        <textarea id="notes" rows={4} placeholder="Heavy legs, good mood, slept late…" />
+      </article>
+
+      <PillButton>Save today’s log <span aria-hidden="true">✦</span></PillButton>
+      <p className={styles.saveMessage} role="status">Saved to your arc. Nice and gentle.</p>
+    </form>
+  );
 }

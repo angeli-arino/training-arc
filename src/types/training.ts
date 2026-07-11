@@ -10,7 +10,7 @@ export type Soreness = "none" | "mild" | "medium" | "spicy" | "absolutely_cooked
 export type Breathing = "normal" | "slightly_off" | "coughing" | "sick_sick";
 export type Mood = "calm" | "frazzled" | "anxious" | "emotionally_cooked";
 export type PlannedWorkout = "run" | "gym" | "hybrid" | "rest_day" | "unsure";
-export type Route = "home" | "scan" | "result" | "log" | "arc";
+export type Route = "home" | "scan" | "result" | "log" | "arc" | "stats" | "profile";
 export type Theme = "light" | "dark";
 
 export interface BodyScan {

@@ -1,41 +1,9 @@
-.resultHero {
-  border-radius: var(--radius-compact);
-  padding: var(--space-lg);
-  background: var(--color-surface-warm);
-}
-
-.resultHero h2 {
-  margin-top: var(--space-md);
-  font-size: 1.8rem;
-}
-
-.slay-day {
-  background: color-mix(in srgb, var(--color-slay) 26%, var(--color-surface-warm));
-}
-
-.modify-the-quest {
-  background: color-mix(in srgb, var(--color-modify) 34%, var(--color-surface-warm));
-}
-
-.recovery-episode {
-  background: color-mix(in srgb, var(--color-recovery) 24%, var(--color-surface-warm));
-}
-
-.peace-mode {
-  background: color-mix(in srgb, var(--color-peace) 20%, var(--color-surface-warm));
-}
-
-.resultList {
-  display: grid;
-  gap: var(--space-sm);
-  padding: var(--space-lg) 6px 2px;
-}
-
-.actionStack {
-  display: grid;
-  gap: 10px;
-}
-
-.actionStack button {
-  margin-top: 0;
-}
+.resultHero { border:1px solid var(--card-border); border-radius:var(--radius-card); padding:28px; background:var(--card-surface); box-shadow:var(--card-shadow); }
+.resultHero h2 { margin-top:var(--space-md); font-size:1.85rem; }
+.resultHero p { color:var(--color-text-secondary); }
+.slay-day { box-shadow:inset 4px 0 var(--color-slay); } .modify-the-quest { box-shadow:inset 4px 0 var(--color-modify); } .recovery-episode { box-shadow:inset 4px 0 var(--color-recovery); } .peace-mode { box-shadow:inset 4px 0 var(--color-peace); }
+.resultList { display:grid; gap:10px; padding:var(--space-md) 4px 2px; }
+.resultList > div { padding:14px 16px; border:1px solid rgba(255,255,255,.07); border-radius:16px; background:rgba(255,255,255,.025); }
+.resultList p:last-child { margin-bottom:0; }
+.actionStack { display:grid; gap:10px; }
+.actionStack button { margin-top:0; }

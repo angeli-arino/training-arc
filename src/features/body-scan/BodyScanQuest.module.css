@@ -1,105 +1,20 @@
-.scanProgress {
-  width: 100%;
-  height: 9px;
-  border-radius: var(--radius-pill);
-  background: var(--color-cream);
-  overflow: hidden;
-  margin-bottom: var(--space-lg);
-}
-
-.scanProgress span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
-}
-
-.questionBlock {
-  display: grid;
-  gap: var(--space-md);
-}
-
-.scoreGrid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.scoreGridTen {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.scoreButton {
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 5px;
-  width: 100%;
-  aspect-ratio: 1;
-  min-width: 0;
-  border: 1px solid var(--color-border);
-  border-radius: 50%;
-  background: var(--color-surface);
-  color: var(--color-text);
-  cursor: pointer;
-  box-shadow: var(--shadow-soft);
-  font: inherit;
-}
-
-.scoreButton:active,
-.choicePill:active {
-  transform: scale(0.97);
-}
-
-.scoreButton span {
-  font-size: 1.15rem;
-  font-weight: 900;
-}
-
-.scoreButton small {
-  max-width: 56px;
-  color: var(--color-text-muted);
-  font-size: 0.62rem;
-  line-height: 1.05;
-  text-align: center;
-}
-
-.choiceGrid,
-.actionRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.choicePill {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  min-height: 46px;
-  padding: 0 var(--space-lg);
-  color: var(--color-text);
-  background: var(--color-cream);
-  cursor: pointer;
-  font: inherit;
-  font-weight: 750;
-}
-
-.selected {
-  background: linear-gradient(135deg, var(--color-primary-soft), var(--color-surface-warm));
-  border-color: var(--color-primary);
-  box-shadow: 0 12px 24px rgba(248, 111, 155, 0.24);
-}
-
-.actionRow {
-  justify-content: space-between;
-}
-
-.actionRow button {
-  margin-top: 0;
-  flex: 1 1 140px;
-}
-
-@media (min-width: 760px) {
-  .scoreGridTen {
-    grid-template-columns: repeat(10, minmax(0, 1fr));
-  }
-}
+.scanCard { min-height:400px; padding:22px; border-radius:var(--radius-card); }
+.scanEmblem { display:grid; place-items:center; width:52px; height:52px; margin-bottom:12px; border:1px solid var(--color-border); border-radius:50%; background:radial-gradient(circle,rgba(255,113,175,.28),rgba(255,55,140,.05)); box-shadow:0 0 24px rgba(255,70,148,.22); color:var(--color-primary); font-size:1.45rem; }
+.scanProgress { display:flex; justify-content:center; gap:7px; margin:12px 0 16px; }
+.scanProgress span { width:7px; height:7px; border-radius:999px; background:rgba(255,255,255,.12); transition:var(--transition-fast); }
+.scanProgress .progressActive { width:22px; background:var(--color-primary); box-shadow:0 0 10px rgba(255,68,150,.5); }
+.questionBlock { display:grid; gap:12px; }
+.scoreGrid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:9px; margin-top:6px; }
+.scoreGridTen { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.scoreButton { display:grid; place-items:center; align-content:center; gap:5px; width:100%; aspect-ratio:1; min-width:0; border:1px solid rgba(255,255,255,.09); border-radius:50%; background:rgba(255,255,255,.028); color:var(--color-text-secondary); cursor:pointer; transition:.18s ease; }
+.scoreButton:hover,.choicePill:hover { border-color:var(--color-primary); color:var(--color-primary-deep); }
+.scoreButton:active,.choicePill:active { transform:scale(.97); }
+.scoreButton span { font-family:"Nunito",sans-serif; font-size:1.15rem; font-weight:900; }
+.scoreButton small { max-width:56px; color:var(--color-text-muted); font-size:.58rem; line-height:1.05; text-align:center; }
+.choiceGrid,.actionRow { display:flex; flex-wrap:wrap; gap:10px; }
+.choicePill { border:1px solid rgba(255,255,255,.09); border-radius:var(--radius-pill); min-height:46px; padding:0 var(--space-lg); color:var(--color-text-secondary); background:rgba(255,255,255,.028); cursor:pointer; font-weight:750; }
+.selected { color:#fff; background:linear-gradient(145deg,var(--color-primary),var(--color-secondary)); border-color:transparent; box-shadow:0 8px 18px rgba(225,47,121,.22),inset 0 1px 0 rgba(255,255,255,.4); }
+.selected small { color:rgba(255,255,255,.78); }
+.actionRow { width:min(100%,354px); justify-content:space-between; }
+.actionRow button { margin-top:0; flex:1 1 140px; }
+@media (min-width:760px) { .scoreGridTen { grid-template-columns:repeat(10,minmax(0,1fr)); } }

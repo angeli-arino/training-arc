@@ -1,50 +1,20 @@
-.weeklyStrip {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(58px, 1fr));
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-}
-
-.dayBubble {
-  display: grid;
-  justify-items: center;
-  gap: 5px;
-  min-height: 112px;
-  border-radius: var(--radius-pill);
-  padding: 12px 8px;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-}
-
-.dayBubble strong {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--color-primary-soft);
-}
-
-.dayBubble small {
-  color: var(--color-text-muted);
-  text-align: center;
-  font-size: 0.68rem;
-  line-height: 1.1;
-}
-
-.slay-day strong {
-  background: var(--color-slay);
-}
-
-.modify-the-quest strong {
-  background: var(--color-modify);
-}
-
-.recovery-episode strong {
-  background: var(--color-recovery);
-}
-
-.peace-mode strong {
-  background: var(--color-peace);
-}
+.questBoard { display:grid; gap:24px; }
+.progressCard { display:grid; grid-template-columns:120px minmax(0,1fr); align-items:center; gap:28px; padding:28px; border:1px solid var(--card-border); border-radius:var(--radius-card); background:var(--card-surface); box-shadow:var(--card-shadow); }
+.progressRing { display:grid; place-items:center; width:110px; height:110px; border:10px solid rgba(255,255,255,.78); border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,236,246,.62)); box-shadow:0 0 0 1px var(--color-border),0 10px 30px rgba(228,83,143,.12); }
+.progressRing strong { font-family:"Nunito",sans-serif; font-size:1.25rem; }
+.progressCard h2,.sectionHeading h2 { margin:0; font-size:1.35rem; }
+.progressCard p:last-child { margin-top:8px; }
+.sectionHeading { display:flex; align-items:center; justify-content:space-between; padding:4px 4px 0; }
+.sectionHeading button { border:0; padding:4px 0; color:var(--color-primary-deep); background:transparent; font:inherit; font-weight:850; cursor:pointer; }
+.questList { display:grid; gap:12px; }
+.quest { display:grid; grid-template-columns:62px minmax(0,1fr) 30px; align-items:center; gap:16px; min-height:118px; padding:20px 24px; border:1px solid var(--card-border); border-radius:var(--radius-card); background:var(--card-surface); box-shadow:var(--card-shadow); }
+.quest.complete { background:var(--card-surface); }
+.quest.upcoming { border-color:rgba(255,130,183,.52); }
+.questMark { display:grid; place-items:center; width:58px; height:58px; border:1px solid var(--color-border-strong); border-radius:18px; color:var(--color-primary-deep); background:rgba(255,255,255,.05); font-size:1.15rem; font-weight:900; }
+.complete .questMark { color:white; background:linear-gradient(145deg,var(--color-primary),var(--color-secondary)); border:0; box-shadow:0 8px 20px rgba(216,38,112,.25); font-size:1.5rem; }
+.questCopy { min-width:0; }
+.questCopy p { margin:0; color:var(--color-text-muted); font-size:.78rem; font-weight:800; }
+.questCopy h3 { margin:3px 0 0; font-family:"Nunito",sans-serif; font-size:1.1rem; letter-spacing:-.035em; }
+.questCopy span { display:block; margin-top:7px; color:var(--color-text-muted); font-size:.83rem; }
+.questAction { justify-self:end; border:0; padding:8px; color:var(--color-primary-deep); background:transparent; font:inherit; font-size:1.25rem; font-weight:900; cursor:pointer; }
+@media (max-width:410px) { .progressCard { grid-template-columns:92px minmax(0,1fr); gap:18px; padding:20px; } .progressRing { width:88px; height:88px; border-width:8px; } .quest { grid-template-columns:52px minmax(0,1fr) 24px; gap:12px; padding-inline:16px; } .questMark { width:52px; height:52px; } }
