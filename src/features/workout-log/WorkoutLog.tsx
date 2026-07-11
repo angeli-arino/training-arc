@@ -5,9 +5,9 @@ import styles from "./WorkoutLog.module.css";
 type WorkoutFilter = "all" | "run" | "gym" | "other";
 
 interface WorkoutLogProps {
-  filter: WorkoutFilter;
+  filter?: WorkoutFilter;
   latestResult: TrainingResult | null;
-  onFilterChange: (filter: WorkoutFilter) => void;
+  onFilterChange?: (filter: WorkoutFilter) => void;
 }
 
 export function WorkoutLog({ latestResult }: WorkoutLogProps) {
